@@ -10,8 +10,10 @@ from config import *
 if torch.cuda.is_available():
     print('GPU is available...')
 
-device = torch.device("cuda")
-
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+else:
+    device = torch.device("cpu")
 train_dataset = Data.TensorDataset(torch.Tensor(X_train), torch.Tensor(Y_train))
 train_loader = Data.DataLoader(train_dataset, batch_size=batchsize, shuffle=True, num_workers=2)
 

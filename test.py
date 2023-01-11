@@ -4,8 +4,11 @@ import sys
 import copy
 from config import *
 
-device = torch.device("cuda")
-
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+else:
+    device = torch.device("cpu")
+    
 def get_semantic_ndarray(data):
     tensor_device = torch.Tensor(data).to(device)
     return model.getSemantic(tensor_device).cpu().numpy()
